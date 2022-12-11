@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.generador{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#generador__formulario--boton{
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 10vh 10vw;
+    border-color: transparent;
+}
+
+.boton__productos{
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+    border-color: transparent;
+}
+.color_gallardo{
+    background-color: #c1121f;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_lepes{
+    background-color: #9a031e;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_johansen{
+    background-color: #adc178;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_china{
+    background-color: #ff8fa3;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_pampita{
+    background-color: #faedcd;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_messi{
+    background-color: #219ebc;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_varsky{
+    background-color: #233d4d;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.color_castle{
+    background-color: #fb8500;
+    border-color: transparent;
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    padding: 3vh 3vw;
+}
+.foto_recuadro{
+    width: 30%;
+}
+.div{
+    border: 1px solid grey;
+    padding: 2% 2%;
+    width: 300px;
+    margin-bottom: 5vh;
+    /* height: 400px; */
+}
+#famosos__contenedor, #personas__contenedor{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.foto_recuadro--carrito{
+    width: 5%;
+}
+
