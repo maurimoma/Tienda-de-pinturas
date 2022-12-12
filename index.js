@@ -45,7 +45,9 @@ productosFamosos.push(Gallardo, Lepes, Johansen, Suarez, Pampita, Messi, Varsky,
 
 let contenedorFamosos = document.getElementById("famosos__contenedor");
 
-// let carrito = [];
+
+
+
 
 /* RENDERIZAR PRODUCTOS */
 
@@ -72,7 +74,7 @@ productosFamosos.forEach(producto => {
     botonFamosos.addEventListener("click", () => agregarAlCarrito(producto.id))
     botonFamosos.addEventListener("click", () => total())
 
-    
+
 });
 
 
@@ -84,6 +86,7 @@ const agregarAlCarrito = (id) => {
     // console.log(carrito);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito()
+
 
 }
 
@@ -103,17 +106,11 @@ const actualizarCarrito = () => {
 
 
     });
+   
 }
-
-const total = () => {
-let totalCarrito = carrito.reduce((acum, item) => acum + item.precio, 0);
-let contenedorTotal = document.getElementById("totalcarrito") 
-contenedorTotal.append(totalCarrito);
-}
-
 
 actualizarCarrito();
-// total();
+
 
 // VISUALIZADOR DE COLOR
 
@@ -200,7 +197,9 @@ productosPersonas.forEach(producto => {
 
     let botonPersonas = document.getElementById(`boton${producto.id}`);
 
-    botonPersonas.addEventListener("click", () => agregarAlCarritoPersonas(producto.id))    
+    botonPersonas.addEventListener("click", () => agregarAlCarritoPersonas(producto.id)) 
+    botonPersonas.addEventListener("click", () => total())
+   
 
     // let boton = document.getElementById(`boton${producto.id}`);
     // const ejecutar = (id) => {
@@ -233,24 +232,40 @@ const agregarAlCarritoPersonas = (id) => {
 }
 
 
-/* BOTON CARRITO */
-
-// let botonCarritoMostrar = document.getElementsByClassName("btn btn-outline-success");
-// botonCarritoMostrar.addEventListener("click", () => console.log("click")); 
-
-// let botonCarrito = document.getElementsByClassName("btn btn-outline-success");
-
-// botonCarrito.addEventListener("click", () => {
-//     let divBotonCarrito = document.createElement("div");
-//     divBotonCarrito.innerHTML = "Hola a todos";
-//     let contenedorBotonCarrito = document.getElementById("botonmostrarcarrito");
-//     contenedorBotonCarrito.append(divBotonCarrito);
-// })
-
-
-
 
 /* TOTAL CARRITO */
+const total = () => {
+    let totalCarrito = carrito.reduce((acum, item) => acum + item.precio, 0);
+    let contenedorTotal = document.getElementById("totalcarrito") 
+    contenedorTotal.innerHTML = totalCarrito;
+    }
+
+total();
+
+
+/* VACIAR CARRITO */
+
+const vaciarCarrito = () => {
+    if(carrito.length > 0){
+        let divVaciarCarrito = document.getElementById("vaciarcarrito");
+        divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
+        let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
+        botonVaciarCarritoFinal.addEventListener("click", () => localStorage.clear());
+        }
+    }
+    
+    vaciarCarrito();
+
+
+
+
+
+
+
+
+ 
+
+
 
 
 
