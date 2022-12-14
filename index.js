@@ -71,10 +71,11 @@ productosFamosos.forEach(producto => {
     
     let botonFamosos = document.getElementById(`boton${producto.id}`);
 
-    botonFamosos.addEventListener("click", () => agregarAlCarrito(producto.id))
-    botonFamosos.addEventListener("click", () => total())
-
-
+    botonFamosos.addEventListener("click", () => agregarAlCarrito(producto.id));
+    botonFamosos.addEventListener("click", () => total());
+    // botonFamosos.addEventListener("click", () => vaciarCarrito());
+           
+    
 });
 
 
@@ -85,9 +86,7 @@ const agregarAlCarrito = (id) => {
     carrito.push(producto);
     // console.log(carrito);
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    actualizarCarrito()
-
-
+    actualizarCarrito();
 }
 
 let contenedorCarrito = document.getElementById("mostrarcarrito");
@@ -107,9 +106,20 @@ const actualizarCarrito = () => {
 
     });
    
+    let botonVaciarCarrito = document.getElementById("vaciarcarrito__boton");
+    botonVaciarCarrito.addEventListener("click", () => {
+        localStorage.clear();
+    })
+
+
+    carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
+
 }
 
 actualizarCarrito();
+
+
+
 
 
 // VISUALIZADOR DE COLOR
@@ -229,6 +239,14 @@ const agregarAlCarritoPersonas = (id) => {
     contenedorCarrito.append(divCarrito)
 
     });
+
+    let botonVaciarCarrito = document.getElementById("vaciarcarrito__boton");
+    botonVaciarCarrito.addEventListener("click", () => {
+    localStorage.clear();
+    })
+
+
+    carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
 }
 
 
@@ -243,23 +261,58 @@ const total = () => {
 total();
 
 
+
+
+
+
+
+
 /* VACIAR CARRITO */
 
-const vaciarCarrito = () => {
-    if(carrito.length > 0){
-        let divVaciarCarrito = document.getElementById("vaciarcarrito");
-        divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
-        let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
-        botonVaciarCarritoFinal.addEventListener("click", () => localStorage.clear());
-        }
-    }
+// const vaciarCarrito = () => {
+//     if(carrito.length > 0){
+//         let divVaciarCarrito = document.getElementById("vaciarcarrito");
+//         divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
+//         }
+//     }
     
-    vaciarCarrito();
+//     vaciarCarrito();
+
+
+
+    
+// const vaciarCarritoStorageFinal = () => {
+// let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
+// const vaciarCarritoStorage = () => localStorage.clear();
+
+// botonVaciarCarritoFinal.addEventListener("click", vaciarCarritoStorage);
+// }
+
+// vaciarCarritoStorageFinal();
+
+
+
+// vaciarCarritoStorage();
+
+    
 
 
 
 
 
+    // const vaciarCarrito = () => {
+    //     if(carrito.length > 0){
+    //         let divVaciarCarrito = document.getElementById("vaciarcarrito");
+    //         divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
+    //         let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
+    //         botonVaciarCarritoFinal.addEventListener("click", () => localStorage.clear());
+    //         }
+    //     }
+        
+    //     vaciarCarrito();
+    
+    
+    
 
 
 

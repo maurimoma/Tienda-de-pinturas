@@ -89,4 +89,10 @@
 .foto_recuadro--carrito{
     width: 5%;
 }
+.boton__carrito--ocultar{
+    display: none;
+}
+.boton__carrito--mostrar{
+    display: block;
+}
 
