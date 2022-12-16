@@ -18,24 +18,24 @@
 /* SECCION COLORES FAMOSOS */
 
 class Coloresfamosos{
-    constructor(id, retrato, nombre, precio, categoria){
+    constructor(id, retrato, nombre, colorElegido, precio, categoria){
         this.id = id;
         this.retrato = retrato;
         this.nombre = nombre;
-        // this.color = color;
+        this.color = colorElegido;
         this.precio = precio;
         this.categoria = categoria;
     }
 }
 
-let Gallardo = new Coloresfamosos(1, "./img/gallardo.png", "Marcelo Gallardo", 2400, "Deportista");
-let Lepes = new Coloresfamosos(2, "./img/lepes.png", "Narda Lepes", 2400, "Chef");
-let Johansen = new Coloresfamosos(3, "./img/johansen.png", "Kevin Johansen", 2400, "Músico");
-let Suarez = new Coloresfamosos(4, "./img/suarez.png", "China Suarez", 2400, "Actriz");
-let Pampita = new Coloresfamosos(5, "./img/pampita.png", "Pampita", 2400, "Modelo");
-let Messi = new Coloresfamosos(6, "./img/messi.png", "Lionel Messi", 2400, "Deportista");
-let Varsky = new Coloresfamosos(7, "./img/varsky.png", "Juan Pablo Varsky", 2400, "Periodista");
-let Castle = new Coloresfamosos(8, "./img/castle.png", "Carlos Castle", 2400, "Youtuber");
+let Gallardo = new Coloresfamosos(1, "./img/gallardo.png", "Marcelo Gallardo", "./img/colorGallardo.png", 2400, "Deportista");
+let Lepes = new Coloresfamosos(2, "./img/lepes.png", "Narda Lepes", "./img/colorLepes.png", 2400, "Chef");
+let Johansen = new Coloresfamosos(3, "./img/johansen.png", "Kevin Johansen", "./img/colorJohansen.png", 2400, "Músico");
+let Suarez = new Coloresfamosos(4, "./img/suarez.png", "China Suarez", "./img/colorChina.png", 2400, "Actriz");
+let Pampita = new Coloresfamosos(5, "./img/pampita.png", "Pampita", "./img/colorPampita.png", 2400, "Modelo");
+let Messi = new Coloresfamosos(6, "./img/messi.png", "Lionel Messi", "./img/colorMessi.png", 2400, "Deportista");
+let Varsky = new Coloresfamosos(7, "./img/varsky.png", "Juan Pablo Varsky", "./img/colorVarsky.png", 2400, "Periodista");
+let Castle = new Coloresfamosos(8, "./img/castle.png", "Carlos Castle", "./img/colorCastle.png", 2400, "Youtuber");
 
 
 const productosFamosos = [];
@@ -56,10 +56,9 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 productosFamosos.forEach(producto => {
     let item = document.createElement("div");
     item.innerHTML = `
-        <p>${producto.id}</p>
         <img class="foto_recuadro" src="${producto.retrato}" alt = ""/>
         <h3>${producto.nombre}</h3>
-        <button class="boton__productos"></button>
+        <img class="color_famoso" src="${producto.color}" alt = ""/>
         <p>$${producto.precio}</p>
         <p>${producto.categoria}</p>
         <button id= "boton${producto.id}">Agregar</button>
@@ -72,6 +71,17 @@ productosFamosos.forEach(producto => {
     let botonFamosos = document.getElementById(`boton${producto.id}`);
 
     botonFamosos.addEventListener("click", () => agregarAlCarrito(producto.id));
+    botonFamosos.addEventListener("click", () => {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Se añadió el producto a tu carrito",
+            showConfirmButton: true,
+            timer: 2500,
+        });
+        
+    });
+
     botonFamosos.addEventListener("click", () => total());
     // botonFamosos.addEventListener("click", () => vaciarCarrito());
            
@@ -87,6 +97,7 @@ const agregarAlCarrito = (id) => {
     // console.log(carrito);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
+    
 }
 
 let contenedorCarrito = document.getElementById("mostrarcarrito");
@@ -95,29 +106,58 @@ const actualizarCarrito = () => {
     let aux = '';
     carrito.forEach(itemCarrito => {
         aux += `
-        <h3>AGREGASTE A TU CARRITO</h2>
-        <p>${itemCarrito.nombre}</p>
+        <h4>AGREGASTE A TU CARRITO</h4>
         <img class="foto_recuadro--carrito" src="${itemCarrito.retrato}" alt = ""/>
+        <p>${itemCarrito.nombre}</p>
+        <img class="color_famoso--carrito" src="${itemCarrito.color}" alt = ""/>
         <p>$${itemCarrito.precio}</p>
         `
+    });
 
         contenedorCarrito.innerHTML = aux
-
-
-    });
-   
-    let botonVaciarCarrito = document.getElementById("vaciarcarrito__boton");
-    botonVaciarCarrito.addEventListener("click", () => {
-        localStorage.clear();
-    })
-
-
-    carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
+        carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
+        total()
 
 }
 
-actualizarCarrito();
+/* VACIAR CARRITO */
+   
+    let botonVaciarCarrito = document.getElementById("vaciarcarrito__boton");
+    botonVaciarCarrito.addEventListener("click", () => {
+        
+        Swal.fire({
+            title: "¿Estás seguro que deseas vaciar el carrito?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, estoy seguro",
+            cancelButtonText: "No, no quiero",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.clear();
+                carrito.splice(0, carrito.length);
+                actualizarCarrito()
+            Swal.fire({
+                title: "Carrito eliminado!",
+                icon: "success",
+                text: "El carrito ha sido borrado",
+            });
+        }
+        });
+    });
 
+
+
+
+
+
+/* TOTAL CARRITO */
+const total = () => {
+    let totalCarrito = carrito.reduce((acum, item) => acum + item.precio, 0);
+    let contenedorTotal = document.getElementById("totalcarrito") 
+    contenedorTotal.innerHTML = totalCarrito;
+    }
+
+total();
 
 
 
@@ -148,9 +188,10 @@ formulario.addEventListener("submit", (e) => {
 
     let itemGenerador = document.createElement("div");
     itemGenerador.innerHTML = `
-    <button id="boton10">Hola</button>
-    <h3>${inputsGenerador[2].value};
-    <p>${inputsGenerador[3].value};
+    <button id="boton10">MI COLOR</button>
+    <h3>${inputsGenerador[2].value}
+    <p>${inputsGenerador[3].value}
+    <p>${inputsGenerador[4].value}
     `;
 
     contenedorFormulario.append(itemGenerador);
@@ -159,166 +200,71 @@ formulario.addEventListener("submit", (e) => {
 });
 
 
-
-
 /* SECCION DE COLORES USUARIOS */
 
+let listadoPersonas = document.getElementById("personas__contenedor");
 
-class Colorespersonas{
-    constructor(id, retrato, nombre, precio, categoria){
-        this.id = id;
-        this.retrato = retrato;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.categoria = categoria;
-    }
-}
+fetch("./data.json")
+.then((response) => response.json())
+.then((data) => {
+    data.forEach((productoJson) => {
+        const divJson = document.createElement("div");
+        divJson.innerHTML = `
+            <img class="foto_recuadro" src="${productoJson.foto}" alt = ""/>
+            <h2>${productoJson.nombre}</h2>
+            <img class="foto_recuadro" src="${productoJson.color}" alt = ""/>
+            <p>${productoJson.ocupacion}</p>
+            <p>${productoJson.ciudad}</p>
 
-let Rodriguez = new Colorespersonas(9, "./img/candelarodriguez.png", "Candela Rodriguez", 1200, "Artista plástica");
-let Leon = new Colorespersonas(10, "./img/diegoleon.png", "Diego Leon", 1200, "Diseñador gráfico");
-let Marano = new Colorespersonas(11, "./img/rodrigomarano.png", "Rodrigo Marano", 1200, "Programador");
-let Amuchastegui = new Colorespersonas(12, "./img/agustinamuchastegui.png", "Agustín Amuchastegui", 1200, "Chef");
-let Alegre = new Colorespersonas(13, "./img/camilaalegre.png", "Camila Alegre", 1200, "Psicóloga");
-let Tarditti = new Colorespersonas(14, "./img/victoriatarditti.png", "Victoria Tarditti", 1200, "Abogada");
-let Elorriaga = new Colorespersonas(15, "./img/bereniceelorriaga.png", "Berenice Elorriaga", 1200, "Recruiter");
-let Candelmi = new Colorespersonas(16, "./img/marcocandelmi.png", "Marco Candelmi", 1200, "Médico");
-let Bogisich = new Colorespersonas(17, "./img/diegobogisich.png", "Diego Bogisich", 1200, "Futbolista");
-let Arredondo = new Colorespersonas(18, "./img/eugeniaarredondo.png", "Eugenia Arredondo", 1200, "Decoradora");
-
-
-const productosPersonas = [];
-
-productosPersonas.push(Rodriguez, Leon, Marano, Amuchastegui, Alegre, Tarditti, Elorriaga, Candelmi, Bogisich, Arredondo);
-
-let contenedorPersonas = document.getElementById("personas__contenedor");
-
-productosPersonas.forEach(producto => {
-    let item = document.createElement("div");
-    item.innerHTML = `
-    <p>${producto.id}
-    <img class="foto_recuadro" src="${producto.retrato}" alt = ""/>
-    <h3>${producto.nombre}</h3>
-    <p>$${producto.precio}</p>
-    <p>${producto.categoria}</p>
-    <button id= "boton${producto.id}">Agregar</button>
-    `;
-    item.className = "div";
-    contenedorPersonas.append(item);
-
-    let botonPersonas = document.getElementById(`boton${producto.id}`);
-
-    botonPersonas.addEventListener("click", () => agregarAlCarritoPersonas(producto.id)) 
-    botonPersonas.addEventListener("click", () => total())
-   
-
-    // let boton = document.getElementById(`boton${producto.id}`);
-    // const ejecutar = (id) => {
-    //     console.log(id);
-    // }
-    // boton.addEventListener("click", () => ejecutar(producto.id))
+        `;
+        divJson.className = "div";
+        listadoPersonas.append(divJson);
+    });
 });
 
 
 
-/* AGREGAR AL CARRITO Y RENDERIZARLO */
-const agregarAlCarritoPersonas = (id) => {
-    const producto = productosPersonas.find((producto) => producto.id === id);
-    carrito.push(producto);
-    // console.log(carrito);
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    let divCarrito = document.createElement("div");
-    carrito.forEach(itemCarrito => {
-        divCarrito.innerHTML = ""
-        divCarrito.innerHTML = `
-        <p>${itemCarrito.nombre}</p>
-        <img class="foto_recuadro--carrito" src="${itemCarrito.retrato}" alt = ""/>
-        <p>$${itemCarrito.precio}</p>
-        `
-    let contenedorCarrito = document.getElementById("mostrarcarrito");
-    
-    contenedorCarrito.append(divCarrito)
-
-    });
-
-    let botonVaciarCarrito = document.getElementById("vaciarcarrito__boton");
-    botonVaciarCarrito.addEventListener("click", () => {
-    localStorage.clear();
-    })
 
 
-    carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
-}
-
-
-
-/* TOTAL CARRITO */
-const total = () => {
-    let totalCarrito = carrito.reduce((acum, item) => acum + item.precio, 0);
-    let contenedorTotal = document.getElementById("totalcarrito") 
-    contenedorTotal.innerHTML = totalCarrito;
-    }
-
-total();
-
-
-
-
-
-
-
-
-/* VACIAR CARRITO */
-
-// const vaciarCarrito = () => {
-//     if(carrito.length > 0){
-//         let divVaciarCarrito = document.getElementById("vaciarcarrito");
-//         divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
-//         }
+// class Colorespersonas{
+//     constructor(id, retrato, nombre, categoria, ciudad){
+//         this.id = id;
+//         this.retrato = retrato;
+//         this.nombre = nombre;
+//         this.categoria = categoria;
+//         this.ciudad = ciudad;
 //     }
-    
-//     vaciarCarrito();
-
-
-
-    
-// const vaciarCarritoStorageFinal = () => {
-// let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
-// const vaciarCarritoStorage = () => localStorage.clear();
-
-// botonVaciarCarritoFinal.addEventListener("click", vaciarCarritoStorage);
 // }
 
-// vaciarCarritoStorageFinal();
+// let Rodriguez = new Colorespersonas(9, "./img/candelarodriguez.png", "Candela Rodriguez", "Artista plástica", "Buenos Aires");
+// let Leon = new Colorespersonas(10, "./img/diegoleon.png", "Diego Leon", "Diseñador gráfico", "Buenos Aires");
+// let Marano = new Colorespersonas(11, "./img/rodrigomarano.png", "Rodrigo Marano", "Programador", "Buenos Aires");
+// let Amuchastegui = new Colorespersonas(12, "./img/agustinamuchastegui.png", "Agustín Amuchastegui", "Chef", "Buenos Aires");
+// let Alegre = new Colorespersonas(13, "./img/camilaalegre.png", "Camila Alegre", "Psicóloga", "Buenos Aires");
+// let Tarditti = new Colorespersonas(14, "./img/victoriatarditti.png", "Victoria Tarditti", "Abogada", "Buenos Aires");
+// let Elorriaga = new Colorespersonas(15, "./img/bereniceelorriaga.png", "Berenice Elorriaga", "Recruiter", "Buenos Aires");
+// let Candelmi = new Colorespersonas(16, "./img/marcocandelmi.png", "Marco Candelmi", "Médico", "Buenos Aires");
+// let Bogisich = new Colorespersonas(17, "./img/diegobogisich.png", "Diego Bogisich", "Futbolista", "Buenos Aires");
+// let Arredondo = new Colorespersonas(18, "./img/eugeniaarredondo.png", "Eugenia Arredondo", "Decoradora", "Buenos Aires");
 
 
+// const productosPersonas = [];
 
-// vaciarCarritoStorage();
+// productosPersonas.push(Rodriguez, Leon, Marano, Amuchastegui, Alegre, Tarditti, Elorriaga, Candelmi, Bogisich, Arredondo);
 
-    
+// let contenedorPersonas = document.getElementById("personas__contenedor");
 
-
-
-
-
-    // const vaciarCarrito = () => {
-    //     if(carrito.length > 0){
-    //         let divVaciarCarrito = document.getElementById("vaciarcarrito");
-    //         divVaciarCarrito.innerHTML = `<button id="botonVaciarCarrito">VACIAR CARRITO</button>`;
-    //         let botonVaciarCarritoFinal = document.getElementById(`botonVaciarCarrito`);
-    //         botonVaciarCarritoFinal.addEventListener("click", () => localStorage.clear());
-    //         }
-    //     }
-        
-    //     vaciarCarrito();
-    
-    
-    
+// productosPersonas.forEach(producto => {
+//     let item = document.createElement("div");
+//     item.innerHTML = `
+//     <p>${producto.id}
+//     <img class="foto_recuadro" src="${producto.retrato}" alt = ""/>
+//     <h3>${producto.nombre}</h3>
+//     <p>${producto.categoria}</p>
+//     <p>${producto.ciudad}</p>
+//     `;
+//     item.className = "div";
+//     contenedorPersonas.append(item);
 
 
-
- 
-
-
-
-
-
+// });

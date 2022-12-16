@@ -10,7 +10,9 @@
     align-items: center;
     justify-content: center;
 }
-
+#famosos, #generador, #personas, #totalcarrito{
+    margin-top: 10vh;
+}
 #generador__formulario--boton{
     border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
     padding: 10vh 10vw;
@@ -72,6 +74,12 @@
 }
 .foto_recuadro{
     width: 30%;
+}
+.color_famoso{
+    width: 30%;
+}
+.color_famoso--carrito{
+    width: 3%;
 }
 .div{
     border: 1px solid grey;
