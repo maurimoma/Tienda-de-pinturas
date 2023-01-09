@@ -1,5 +1,5 @@
 [
-    {"id": 9, "foto": "./img/candelarodriguez.png", "nombre": "Candela Rodriguez", "color": "./img/colorRodriguez.png", "ocupacion": "Artista plástica", "ciudad": "Buenos Aires"},
+    {"id": 9, "foto": "./img/candelarodriguez.png", "nombre": "Micaela Rodriguez", "color": "./img/colorRodriguez.png", "ocupacion": "Artista plástica", "ciudad": "Buenos Aires"},
     {"id": 10, "foto": "./img/diegoleon.png", "nombre": "Diego Leon", "color": "./img/colorLeon.png", "ocupacion": "Diseñador gráfico", "ciudad": "Buenos Aires"},
     {"id": 11, "foto": "./img/rodrigomarano.png", "nombre": "Rodrigo Marano", "color": "./img/colorMarano.png", "ocupacion": "Programador ", "ciudad": "Buenos Aires"},
     {"id": 12, "foto": "./img/agustinamuchastegui.png", "nombre": "Agustín Amuchastegui", "color": "./img/colorAmuchastegui.png", "ocupacion": "Chef ", "ciudad": "Buenos Aires"}    

@@ -3,7 +3,32 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo{
+    width: 10vw;
+}
+.bi-linkedin {
+    color: rgb(22, 30, 138);
+  }
+.bi-linkedin:hover {
+    color: #c02907;
+  }
+.bi-instagram {
+    color: rgb(22, 30, 138);
+  }
+.bi-instagram:hover {
+    color: #c02907;
+  }
+.bi-youtube {
+    color: rgb(22, 30, 138);
+  }
+.bi-youtube:hover {
+    color: #c02907;
+  }
 .generador{
     display: flex;
     flex-direction: column;
@@ -23,6 +48,13 @@
     border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
     padding: 3vh 3vw;
     border-color: transparent;
+}
+#vaciarcarrito__boton{
+    border-radius: 77% 23% 49% 51% / 56% 32% 68% 44%;
+    border-color: grey;
+    padding: 3vh 3vw;
+    margin-top: 5vh;
+    background-color: #bfcf90;
 }
 .color_gallardo{
     background-color: #c1121f;
@@ -103,4 +135,6 @@
 .boton__carrito--mostrar{
     display: block;
 }
-
+main{
+    margin-left: 2vw;
+}

@@ -17,6 +17,8 @@
 
 /* SECCION COLORES FAMOSOS */
 
+
+
 class Coloresfamosos{
     constructor(id, retrato, nombre, colorElegido, precio, categoria){
         this.id = id;
@@ -94,9 +96,10 @@ productosFamosos.forEach(producto => {
 const agregarAlCarrito = (id) => {
     const producto = productosFamosos.find((producto) => producto.id === id);
     carrito.push(producto);
-    // console.log(carrito);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
+    console.log(carrito);
+
     
 }
 
@@ -115,10 +118,11 @@ const actualizarCarrito = () => {
     });
 
         contenedorCarrito.innerHTML = aux
-        carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" :  botonVaciarCarrito.className = "boton__carrito--ocultar";
+        carrito.length > 0 ? botonVaciarCarrito.className = "boton__carrito--mostrar" : botonVaciarCarrito.className = "boton__carrito--ocultar";
         total()
 
 }
+
 
 /* VACIAR CARRITO */
    
@@ -154,12 +158,14 @@ const actualizarCarrito = () => {
 const total = () => {
     let totalCarrito = carrito.reduce((acum, item) => acum + item.precio, 0);
     let contenedorTotal = document.getElementById("totalcarrito") 
-    contenedorTotal.innerHTML = totalCarrito;
+    contenedorTotal.innerHTML = `<h3>TOTAL: $${totalCarrito}</h3>
+                                `;
     }
 
-total();
+// total();
 
 
+actualizarCarrito();
 
 
 // VISUALIZADOR DE COLOR
@@ -188,7 +194,7 @@ formulario.addEventListener("submit", (e) => {
 
     let itemGenerador = document.createElement("div");
     itemGenerador.innerHTML = `
-    <button id="boton10">MI COLOR</button>
+    <button id="boton10" class= "boton__productos">MI COLOR</button>
     <h3>${inputsGenerador[2].value}
     <p>${inputsGenerador[3].value}
     <p>${inputsGenerador[4].value}
